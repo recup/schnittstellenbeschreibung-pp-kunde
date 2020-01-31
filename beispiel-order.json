@@ -1,0 +1,24 @@
+{
+  "locationIdentifier": "INT-3",
+  "orderId": "O23456",
+  "orderTime": "2019-10-04T10:10:05Z",
+  "orderItems": [
+    {
+      "articleNumber": "ART-40005",
+      "quantity": 600
+    },
+    {
+      "articleNumber": "ART-142",
+      "quantity": 250
+    }
+  ],
+  "shippingDetails": {
+    "company": "Tankstelle XYZ",
+    "firstName": "Max",
+    "lastName": "Mustermann",
+    "street": "Mustermannstraße 92",
+    "zipCode": "99999",
+    "city": "Musterstadthausendorf"
+  },
+  "fileId": 1
+}

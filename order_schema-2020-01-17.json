@@ -1,0 +1,145 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://recup.de/files/order.json#2020-01-17",
+  "type": "object",
+  "title": "RECUP Order Schema",
+  "default": null,
+  "required": [
+    "locationIdentifier",
+    "orderId",
+    "orderTime",
+    "orderItems",
+    "shippingDetails"
+  ],
+  "properties": {
+    "locationIdentifier": {
+      "$id": "#/properties/locationIdentifier",
+      "type": "string",
+      "title": "Ausgabestellen-Identifikation",
+      "default": "",
+      "examples": ["INT-3", "Filiale Beispielweg"],
+      "pattern": "^(.*)$"
+    },
+    "orderId": {
+      "$id": "#/properties/orderId",
+      "type": "string",
+      "title": "Bestellnummer im System des Kunden",
+      "default": "",
+      "examples": ["O23456"],
+      "pattern": "^(.*)$"
+    },
+    "orderTime": {
+      "$id": "#/properties/orderTime",
+      "type": "string",
+      "title": "Timestamp der Bestellung im System des RECUP-Kunden",
+      "description": "ISO8601",
+      "default": "",
+      "examples": ["2019-10-04T10:10:05Z"],
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z)$"
+    },
+    "orderItems": {
+      "$id": "#/properties/orderItems",
+      "type": "array",
+      "title": "Artikelliste",
+      "default": null,
+      "items": {
+        "$id": "#/properties/orderItems/items",
+        "type": "object",
+        "title": "Bestellposition",
+        "default": null,
+        "required": ["articleNumber", "quantity"],
+        "properties": {
+          "articleNumber": {
+            "$id": "#/properties/orderItems/items/properties/articleNumber",
+            "type": "string",
+            "title": "RECUP-Artikel-ID",
+            "default": "",
+            "examples": ["ART-12345"],
+            "pattern": "^(ART-\\d+)$"
+          },
+          "quantity": {
+            "$id": "#/properties/orderItems/items/properties/quantity",
+            "type": "integer",
+            "title": "Anzahl",
+            "default": 0,
+            "examples": [5]
+          }
+        }
+      }
+    },
+    "shippingDetails": {
+      "$id": "#/properties/shippingDetails",
+      "type": "object",
+      "title": "Lieferadresse",
+      "default": null,
+      "required": [
+        "company",
+        "firstName",
+        "lastName",
+        "street",
+        "zipCode",
+        "city"
+      ],
+      "properties": {
+        "company": {
+          "$id": "#/properties/shippingDetails/properties/company",
+          "type": "string",
+          "title": "Firmenname",
+          "default": "",
+          "examples": ["Café Becher GmbH"],
+          "pattern": "^(.*)$"
+        },
+        "firstName": {
+          "$id": "#/properties/shippingDetails/properties/firstName",
+          "type": "string",
+          "title": "Empfänger/Ansprechpartner Vorname",
+          "default": "",
+          "examples": ["Max"],
+          "pattern": "^(.*)$"
+        },
+        "lastName": {
+          "$id": "#/properties/shippingDetails/properties/lastName",
+          "type": "string",
+          "title": "Empfänger/Ansprechpartner Nachname",
+          "default": "",
+          "examples": ["Mustermann"],
+          "pattern": "^(.*)$"
+        },
+        "street": {
+          "$id": "#/properties/shippingDetails/properties/street",
+          "type": "string",
+          "title": "Straße",
+          "default": "",
+          "examples": ["Mustermannstraße 92"],
+          "pattern": "^(.*)$"
+        },
+        "zipCode": {
+          "$id": "#/properties/shippingDetails/properties/zipCode",
+          "type": "string",
+          "title": "PLZ",
+          "default": "",
+          "examples": ["99999"],
+          "pattern": "^(\\d{5})$"
+        },
+        "city": {
+          "$id": "#/properties/shippingDetails/properties/city",
+          "type": "string",
+          "title": "Stadt",
+          "default": "",
+          "examples": ["Musterstadthausendorf"],
+          "pattern": "^(.*)$"
+        }
+      }
+    },
+    "fileId": {
+      "$id": "#/properties/fileId",
+      "type": "string",
+      "title": "Version der Bestelldatei",
+      "description": "Normalerweise unbenutzt",
+      "default": null,
+      "examples": ["1"],
+      "pattern": "^(.*)$"
+    }
+  }
+}
