@@ -79,4 +79,8 @@ schnelle Einmal-Tests hat sich bisher der frei verfügbare
 - periodischer Check auf nicht verarbeitbare JSON-Dateien: Kunde
 
 
-## Änderungen an diesem Dokuments
+## Änderungen an diesem Dokument
+
+### 2020-01-31
+
+Initiale Version.
