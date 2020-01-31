@@ -6,42 +6,69 @@ Autor: Carlo Zottmann, it@recup.de
 
 ## Generelles
 
-Der Datenaustausch zwischen Kunden und RECUP erfolgt über einen SFTP-Server. Der Server wird bereitgestellt von RECUP.
+Der Datenaustausch zwischen Kunden und RECUP erfolgt asynchron über einen
+SFTP-Server. Der Server wird bereitgestellt von RECUP.
 
-Der Kunde legt Bestellungen als JSON-Files auf dem Server ab, deren Verarbeitung erfolgt periodisch durch RECUP. Nach Bearbeitung wird RECUP das jeweilige File aus dem Eingangsordner entfernen.
+Der Kunde legt Bestellungen als JSON-Files auf dem Server ab, deren Verarbeitung
+erfolgt periodisch durch RECUP. Nach Bearbeitung wird RECUP das jeweilige File
+aus dem Eingangsordner entfernen.
+
+RECUP betreibt zwei SFTP-Server: Entwicklung/Staging und Production.
+Bestellungen etc. aus dem Test-/Entwicklungsbetrieb müssen von beiden Parteien
+getrennt von Daten aus dem Live-Betrieb behandelt werden.
+
+Beim Aufsetzen der Schnittstellen wird RECUP dem Kunden zusammen mit den
+SFTP-Zugangsdaten die zu verwendende Version der Schnittstellenbeschreibung
+mitteilen.
 
 
 ## Anlieferung von Bestellungen
 
-Jede Bestellung muss in einer separaten JSON-Datei mit der Dateiendung `.json` im Encoding UTF-8 übermittelt werden, deren Dateiname eindeutig sein muss. Als Dateiname bieten sich z.B. an:
+Jede Bestellung muss in einer separaten JSON-Datei mit der Endung `.json`
+im Encoding UTF-8 übermittelt werden, deren Dateiname eindeutig sein muss. Als
+Dateiname bieten sich z.B. an:
 
     * Timestamp
     * Timestamp + Filial-ID im System des Kunden
     * eindeutige Bestellnummer im System des Kunden
 
-Die Bestellungen werden vom Kunden in das SFTP-Verzeichnis `/orders/` gespeichert.
+Die Bestellungen werden vom Kunden in das SFTP-Verzeichnis `/orders/`
+gespeichert.
 
-Jede eingehende JSON-Datei wird automatisch nach RECUP's JSON-Schema validiert. Wenn diese Validierung fehlschlägt, wird die Datei in das Verzeichnis `/orders/unprocessable/` verschoben und nicht verarbeitet. Dateien in diesem Verzeichnis dienen dem Kunden als Hinweis auf Fehler bei der Erstellung der Bestelldaten, RECUP wird nicht gesondert darauf hinweisen.
+Jede eingehende JSON-Datei wird automatisch nach
+[RECUP's JSON-Schema](order_schema-2020-01-17.json) validiert. Wenn diese
+Validierung fehlschlägt, wird die Datei in das Verzeichnis
+`/orders/unprocessable/` verschoben und nicht verarbeitet. Dateien in diesem
+Verzeichnis dienen dem Kunden als Hinweis auf Fehler bei der Erstellung der
+Bestelldaten, RECUP wird nicht gesondert darauf hinweisen.
 
-JSON-Schema: https://github.com/recup/servitor/blob/master/lib/order_schema.json
-JSON Schema Validator: https://www.jsonschemavalidator.net/
-Beispiel: ~/Dev\ Bucket/Beispiel-Bestellung.json
+Automatisiert erstellten JSON-Dateien sollten der Kunde während der Entwicklung
+mittels eines JSON-Validators testen. Validatoren gibt es für alle gängigen
+Programmiersprachen, hierbei kann RECUP aber keine Empfehlung aussprechen.  Für
+schnelle Einmal-Tests hat sich bisher der frei verfügbare
+[JSON Schema Validator](https://www.jsonschemavalidator.net/) bewährt.
+
 
 ### TL;DR
 
 - SFTP-Verzeichnis `/orders/`
 - eine JSON-Datei pro Bestellung, UTF-8
 - Dateiname `XYZ.json`, "XYZ" muss eindeutig/unique sein
-- eingehende JSON-Datei werden nach Schema validiert
-	- Erfolg: weitere Verarbeitung
-	- Fehler: Datei wird in `/orders/unprocessable/` verschoben, keine Verarbeitung
+- eingehende JSON-Datei werden nach
+  [RECUP's JSON-Schema](order_schema-2020-01-17.json) validiert
+  - Erfolg: weitere Verarbeitung
+  - Fehler: Datei wird in `/orders/unprocessable/` verschoben, keine Verarbeitung
+- Beispiel einer JSON-Bestelldatei:
+  - [mit Beschreibung](order-json-beschreibung.js)
+  - [ohne Beschreibung](order-json-beispiel.json)
 
 
 ### Hinweise zu Datenfeldern
 
 - RECUP-Artikelnummern beginnen immer mit "ART-"
 - `firstName` und `lastName` dürfen leer sein (leerer String)
-- sind `company`, `firstName` und `lastName` gesetzt, werden diese Felder als Empfänger auf dem Versandetikett stehen
+- sind `company`, `firstName` und `lastName` gesetzt, werden diese Felder als
+  Empfänger auf dem Versandetikett stehen
 
 
 ### Verantwortlichkeiten
@@ -52,7 +79,4 @@ Beispiel: ~/Dev\ Bucket/Beispiel-Bestellung.json
 - periodischer Check auf nicht verarbeitbare JSON-Dateien: Kunde
 
 
-## TODO / TBD
-
-Infos zu Mailversand während der Bestellung?
-
+## Änderungen an diesem Dokuments
