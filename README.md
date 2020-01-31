@@ -9,10 +9,6 @@ Autor: Carlo Zottmann, it@recup.de
 Der Datenaustausch zwischen Kunden und RECUP erfolgt asynchron über einen
 SFTP-Server. Der Server wird bereitgestellt von RECUP.
 
-Der Kunde legt Bestellungen als JSON-Files auf dem Server ab, deren Verarbeitung
-erfolgt periodisch durch RECUP. Nach Bearbeitung wird RECUP das jeweilige File
-aus dem Eingangsordner entfernen.
-
 RECUP betreibt zwei SFTP-Server: Entwicklung/Staging und Production.
 Bestellungen etc. aus dem Test-/Entwicklungsbetrieb müssen von beiden Parteien
 getrennt von Daten aus dem Live-Betrieb behandelt werden.
@@ -24,13 +20,17 @@ mitteilen.
 
 ## Anlieferung von Bestellungen
 
+Der Kunde legt Bestellungen als JSON-Files auf dem Server ab, deren Verarbeitung
+erfolgt periodisch durch RECUP. Nach Bearbeitung wird RECUP das jeweilige File
+aus dem Eingangsordner entfernen.
+
 Jede Bestellung muss in einer separaten JSON-Datei mit der Endung `.json`
 im Encoding UTF-8 übermittelt werden, deren Dateiname eindeutig sein muss. Als
 Dateiname bieten sich z.B. an:
 
-    * Timestamp
-    * Timestamp + Filial-ID im System des Kunden
-    * eindeutige Bestellnummer im System des Kunden
+- Timestamp
+- Timestamp + Filial-ID im System des Kunden
+- eindeutige Bestellnummer im System des Kunden
 
 Die Bestellungen werden vom Kunden in das SFTP-Verzeichnis `/orders/`
 gespeichert.
