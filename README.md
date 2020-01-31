@@ -14,8 +14,7 @@ Bestellungen etc. aus dem Test-/Entwicklungsbetrieb müssen von beiden Parteien
 getrennt von Daten aus dem Live-Betrieb behandelt werden.
 
 Beim Aufsetzen der Schnittstellen wird RECUP dem Kunden zusammen mit den
-SFTP-Zugangsdaten die zu verwendende Version der Schnittstellenbeschreibung
-mitteilen.
+SFTP-Zugangsdaten die zu verwendende Version der Schnittstelle mitteilen.
 
 
 ## Anlieferung von Bestellungen
@@ -74,9 +73,10 @@ schnelle Einmal-Tests hat sich bisher der frei verfügbare
 ### Verantwortlichkeiten
 
 - Bereitstellung der SFTP-Server: RECUP
-- Bereitstellung der Bestelldaten auf SFTP-Server (Push): Kunde
-- Verarbeitung & Verschieben der Bestelldaten: RECUP
-- periodischer Check auf nicht verarbeitbare JSON-Dateien: Kunde
+- Anlieferung von Bestelldaten auf SFTP-Server (Push): Kunde
+- Verarbeitung der Bestelldateien: RECUP
+- Verschieben der verarbeiteten Bestelldateien: RECUP
+- periodischer Check auf fehlerhafte (nicht valide) JSON-Dateien: Kunde
 
 
 ## Änderungen an diesem Dokument
