@@ -39,10 +39,10 @@ Jede eingehende JSON-Datei wird automatisch nach
 [RECUP's JSON-Schema](order_schema-2020-01-17.json) validiert. Wenn diese
 Validierung fehlschlägt, wird die Datei in das Verzeichnis
 `/orders/unprocessable/` verschoben und nicht verarbeitet. Dateien in diesem
-Verzeichnis dienen dem Kunden als Hinweis auf Fehler bei der Erstellung der
+Verzeichnis dienen dem Kunden als Hinweis auf Fehler in der Struktur der
 Bestelldaten, RECUP wird nicht gesondert darauf hinweisen.
 
-Automatisiert erstellten JSON-Dateien sollten der Kunde während der Entwicklung
+Automatisiert erstellten JSON-Dateien sollte der Kunde während der Entwicklung
 mittels eines JSON-Validators testen. Validatoren gibt es für alle gängigen
 Programmiersprachen, hierbei kann RECUP aber keine Empfehlung aussprechen.  Für
 schnelle Einmal-Tests hat sich bisher der frei verfügbare
